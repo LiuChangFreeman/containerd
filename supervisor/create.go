@@ -43,7 +43,7 @@ func (s *Supervisor) start(t *StartTask) error {
 		Shim:        s.shim,
 		Labels:      t.Labels,
 		NoPivotRoot: t.NoPivotRoot,
-		Timeout:     s.timeout,
+		Timeout:     time.Minute * 30,
 	})
 	if err != nil {
 		return err

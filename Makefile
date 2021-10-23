@@ -24,7 +24,7 @@ TESTBENCH_ARTIFACTS_DIR := output/test-artifacts
 TESTBENCH_BUNDLE_DIR := $(TESTBENCH_ARTIFACTS_DIR)/archives
 
 DOCKER_IMAGE := containerd-dev$(if $(GIT_BRANCH),:$(GIT_BRANCH))
-DOCKER_RUN := docker run --privileged --rm -i $(DOCKER_FLAGS) "$(DOCKER_IMAGE)"
+DOCKER_RUN := docker run --privileged --name containerd -v /home:/home --rm -i $(DOCKER_FLAGS) "$(DOCKER_IMAGE)"
 
 
 export GOPATH:=$(CURDIR)/vendor:$(GOPATH)
