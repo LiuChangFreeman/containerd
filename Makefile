@@ -59,7 +59,7 @@ shim-static:
 
 $(TESTBENCH_BUNDLE_DIR)/busybox.tar:
 	mkdir -p $(TESTBENCH_BUNDLE_DIR)
-	curl -sSL 'https://github.com/jpetazzo/docker-busybox/raw/buildroot-2014.11/rootfs.tar' -o $(TESTBENCH_BUNDLE_DIR)/busybox.tar
+	curl -sSL https://github.com/jpetazzo/docker-busybox/raw/buildroot-2014.11/rootfs.tar -o $(TESTBENCH_BUNDLE_DIR)/busybox.tar
 
 bundles-rootfs: $(TESTBENCH_BUNDLE_DIR)/busybox.tar
 

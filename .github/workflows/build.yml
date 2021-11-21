@@ -1,0 +1,33 @@
+name: release
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+
+      - name: Build
+        run: |
+          make dbuild
+          docker create --name containerd-dev containerd-dev:main
+          docker cp containerd-dev:/go/src/github.com/docker/containerd/bin .
+          zip -j -r containerd.zip bin/*
+
+      - name: Test output
+        shell: pwsh
+        run: Test-Path containerd.zip | Should -Be $true
+
+      - name: Public release
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: true
+          title: "Development Build"
+          files: |
+            containerd.zip
